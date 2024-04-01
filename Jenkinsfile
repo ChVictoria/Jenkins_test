@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://git.comsys.kpi.ua/student075/Lab4_IT', credentialsId: '50960055a9850bb153d88d64ec5bb1d812e52f53'
+                git url: 'https://git.comsys.kpi.ua/student075/Lab4_IT', credentialsId: 'gitea_token'
             }
         }
         
@@ -26,8 +26,10 @@ pipeline {
 
     post {
     always {
-        // Publish test results using the junit step
-         // Specify the path to the XML test result files
+		xunit (
+			thresholds: [ skipped(failureThreshold: '0'), failed(failureThreshold: '0') ],
+			tools: [ (pattern: 'test_report.xml') ]
+		)
     }
 }
 }
