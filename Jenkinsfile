@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // Крок для збірки проекту з Visual Studio
                 // Встановіть правильні шляхи до рішення/проекту та параметри MSBuild
-                bat '"path to MSBuild" Lab4_IT.sln /t:Build /p:Configuration=Release'
+                bat '\"${tool 'VS_build'}\" Lab4_IT.sln /t:Build /p:Configuration=Release'
             }
         }
 
